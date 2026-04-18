@@ -56,20 +56,36 @@ const commands = [
 
   // 🎭 Roles
   new SlashCommandBuilder()
-    .setName('role')
-    .setDescription('Manage roles')
-    .addSubcommand(sub =>
-      sub.setName('add')
-        .setDescription('Add role')
-        .addUserOption(o => o.setName('user').setRequired(true))
-        .addRoleOption(o => o.setName('role').setRequired(true))
-    )
-    .addSubcommand(sub =>
-      sub.setName('remove')
-        .setDescription('Remove role')
-        .addUserOption(o => o.setName('user').setRequired(true))
-        .addRoleOption(o => o.setName('role').setRequired(true))
-    ),
+  .setName('role')
+  .setDescription('Manage roles')
+  .addSubcommand(sub =>
+    sub.setName('add')
+      .setDescription('Add role to user')
+      .addUserOption(o =>
+        o.setName('user')
+          .setDescription('User to give role') // ✅ REQUIRED
+          .setRequired(true)
+      )
+      .addRoleOption(o =>
+        o.setName('role')
+          .setDescription('Role to add') // ✅ REQUIRED
+          .setRequired(true)
+      )
+  )
+  .addSubcommand(sub =>
+    sub.setName('remove')
+      .setDescription('Remove role from user')
+      .addUserOption(o =>
+        o.setName('user')
+          .setDescription('User to remove role from') // ✅ REQUIRED
+          .setRequired(true)
+      )
+      .addRoleOption(o =>
+        o.setName('role')
+          .setDescription('Role to remove') // ✅ REQUIRED
+          .setRequired(true)
+      )
+  ),
 
 ].map(cmd => cmd.toJSON());
 
